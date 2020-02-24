@@ -1,68 +1,54 @@
-'use strict';
+"use strict";
 
-var _react = require('react');
+var _react = _interopRequireDefault(require("react"));
 
-var _react2 = _interopRequireDefault(_react);
+var _server = _interopRequireDefault(require("react-dom/server"));
 
-var _server = require('react-dom/server');
+var _index = _interopRequireDefault(require("../index.js"));
 
-var _server2 = _interopRequireDefault(_server);
+var _assert = _interopRequireDefault(require("assert"));
 
-var _index = require('../index.js');
+var _reactFormstateFp = require("react-formstate-fp");
 
-var _index2 = _interopRequireDefault(_index);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _assert = require('assert');
+var formstate, form;
 
-var _assert2 = _interopRequireDefault(_assert);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var form = void 0,
-    input = void 0;
-
-var html = _server2.default.renderToString(_react2.default.createElement(
-  'html',
-  { lang: 'en' },
-  _react2.default.createElement(
-    'head',
-    null,
-    _react2.default.createElement('meta', { charSet: 'utf-8' }),
-    _react2.default.createElement(
-      'title',
-      null,
-      'CI Test'
-    )
-  ),
-  _react2.default.createElement(
-    'body',
-    null,
-    _react2.default.createElement(_index2.default, {
-      model: { test: 'hello world!' },
-      grabFormRef: function grabFormRef(c) {
-        return form = c;
-      },
-      grabInputRef: function grabInputRef(c) {
-        return input = c;
-      }
-    })
-  )
-));
+var html = _server["default"].renderToString(_react["default"].createElement("html", {
+  lang: "en"
+}, _react["default"].createElement("head", null, _react["default"].createElement("meta", {
+  charSet: "utf-8"
+}), _react["default"].createElement("title", null, "CI Test")), _react["default"].createElement("body", null, _react["default"].createElement(_index["default"], {
+  model: {
+    test: 'hello world!'
+  },
+  grabFormstate: function grabFormstate(fs) {
+    return formstate = fs;
+  },
+  grabForm: function grabForm(fm) {
+    return form = fm;
+  }
+}))));
 
 describe('App', function () {
   it('injects the model data', function () {
-    _assert2.default.equal('hello world!', input.props.fieldState.getValue());
+    _assert["default"].equal('hello world!', _reactFormstateFp.rff.getValue(formstate, 'test'));
   });
   it('validates onChange', function () {
-    _assert2.default.equal(false, input.props.fieldState.isValidated());
-    form.setState = function (updates) {
-      form.state = Object.assign(form.state, updates);
+    _assert["default"].equal(false, _reactFormstateFp.rff.isValidated(formstate, 'test'));
+
+    form.setFormstate = function (f) {
+      formstate = f(formstate);
     };
-    input.props.handleValueChange('a');
-    var fi = form.formState.getFieldState('test');
-    _assert2.default.equal('a', fi.getValue());
-    _assert2.default.equal(true, fi.isValidated());
-    _assert2.default.equal(true, fi.isInvalid());
-    _assert2.default.equal('Test must have a minimum length of 8', fi.getMessage());
+
+    _reactFormstateFp.rff.handleChange(form, 'a', _reactFormstateFp.rff.getId(formstate, 'test'));
+
+    _assert["default"].equal('a', _reactFormstateFp.rff.getValue(formstate, 'test'));
+
+    _assert["default"].equal(true, _reactFormstateFp.rff.isValidated(formstate, 'test'));
+
+    _assert["default"].equal(true, _reactFormstateFp.rff.isInvalid(formstate, 'test'));
+
+    _assert["default"].equal('Test must be at least 8 characters.', _reactFormstateFp.rff.getMessage(formstate, 'test'));
   });
 });

@@ -1,146 +1,122 @@
-'use strict';
+"use strict";
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = TestForm;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _react = _interopRequireWildcard(require("react"));
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _reactFormstateFp = require("react-formstate-fp");
 
-var _react = require('react');
+var _reactFormstateValidation = require("react-formstate-validation");
 
-var _react2 = _interopRequireDefault(_react);
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-var _reactFormstate = require('react-formstate');
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var _reactFormstateValidation = require('react-formstate-validation');
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
-_reactFormstate.FormState.rfsProps.updateFormState.suppress = true;
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-_reactFormstateValidation.validationAdapter.plugInto(_reactFormstate.FormState);
-
-var Input = function Input(_ref) {
+function Input(_ref) {
   var label = _ref.label,
       value = _ref.value,
       help = _ref.help,
       onChange = _ref.onChange,
       onBlur = _ref.onBlur;
+  return _react["default"].createElement("div", null, _react["default"].createElement("div", null, label), _react["default"].createElement("input", {
+    type: "text",
+    value: value,
+    onChange: onChange,
+    onBlur: onBlur
+  }), _react["default"].createElement("div", null, help));
+}
 
-  return _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(
-      'div',
-      null,
-      label
-    ),
-    _react2.default.createElement('input', { type: 'text', value: value, onChange: onChange, onBlur: onBlur }),
-    _react2.default.createElement(
-      'div',
-      null,
-      help
-    )
-  );
-};
+function RffInput(_ref2) {
+  var formstate = _ref2.formstate,
+      modelKey = _ref2.modelKey,
+      form = _ref2.form,
+      other = _objectWithoutProperties(_ref2, ["formstate", "modelKey", "form"]);
 
-var RfsInput = function (_Component) {
-  _inherits(RfsInput, _Component);
+  return _react["default"].createElement(Input, _extends({
+    value: _reactFormstateFp.rff.getValue(formstate, modelKey),
+    help: form.calculatePrimed(formstate, modelKey) && _reactFormstateFp.rff.getMessage(formstate, modelKey),
+    onChange: function onChange(e) {
+      return _reactFormstateFp.rff.handleChange(form, e.target.value, _reactFormstateFp.rff.getId(formstate, modelKey));
+    },
+    onBlur: function onBlur() {
+      return _reactFormstateFp.rff.handleBlur(form, _reactFormstateFp.rff.getId(formstate, modelKey));
+    }
+  }, other));
+}
 
-  function RfsInput(props) {
-    _classCallCheck(this, RfsInput);
+function TestForm(_ref3) {
+  var model = _ref3.model,
+      grabFormstate = _ref3.grabFormstate,
+      grabForm = _ref3.grabForm;
 
-    return _possibleConstructorReturn(this, (RfsInput.__proto__ || Object.getPrototypeOf(RfsInput)).call(this, props));
+  var _useState = (0, _react.useState)(function () {
+    return _reactFormstateFp.rff.initializeFormstate(model);
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      formstate = _useState2[0],
+      setFormstate = _useState2[1];
+
+  var form = {
+    setFormstate: setFormstate,
+    adaptors: [RffInput],
+    calculatePrimed: _reactFormstateFp.rff.primeOnChange
+  };
+  grabFormstate(formstate);
+  grabForm(form);
+  return _react["default"].createElement("form", {
+    onSubmit: function onSubmit(e) {
+      return handleSubmit(e, form);
+    }
+  }, _react["default"].createElement(_reactFormstateFp.FormScope, {
+    formstate: formstate,
+    form: form
+  }, _react["default"].createElement(_reactFormstateFp.FormField, {
+    name: "test",
+    required: true,
+    validate: validateTest
+  }, _react["default"].createElement(RffInput, {
+    label: "Test"
+  }))), _react["default"].createElement("input", {
+    type: "submit",
+    value: "Submit",
+    disabled: _reactFormstateFp.rff.isPrimedModelInvalid(formstate, form.calculatePrimed)
+  }));
+}
+
+function validateTest(value) {
+  if (value.length < 8) {
+    return 'Test must be at least 8 characters.';
   }
+}
 
-  _createClass(RfsInput, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          grabRef = _props.grabRef,
-          fieldState = _props.fieldState,
-          handleValueChange = _props.handleValueChange,
-          showValidationMessage = _props.showValidationMessage,
-          other = _objectWithoutProperties(_props, ['grabRef', 'fieldState', 'handleValueChange', 'showValidationMessage']);
+function handleSubmit(e, form) {
+  e.preventDefault();
+  form.setFormstate(function (fs) {
+    fs = _reactFormstateFp.rff.validateForm(fs, form);
 
-      if (grabRef) {
-        grabRef(this);
-      }
-
-      return _react2.default.createElement(Input, _extends({
-        value: fieldState.getValue(),
-        help: fieldState.getMessage(),
-        onChange: function onChange(e) {
-          return handleValueChange(e.target.value);
-        },
-        onBlur: showValidationMessage
-      }, other));
+    if (_reactFormstateFp.rff.isModelValid(fs)) {
+      alert(JSON.stringify(fs.model));
     }
-  }]);
 
-  return RfsInput;
-}(_react.Component);
-
-;
-
-var TestForm = function (_Component2) {
-  _inherits(TestForm, _Component2);
-
-  function TestForm(props) {
-    _classCallCheck(this, TestForm);
-
-    var _this2 = _possibleConstructorReturn(this, (TestForm.__proto__ || Object.getPrototypeOf(TestForm)).call(this, props));
-
-    _this2.formState = new _reactFormstate.FormState(_this2);
-    _this2.state = _this2.formState.createUnitOfWork().injectModel(props.model);
-    props.grabFormRef(_this2);
-    return _this2;
-  }
-
-  _createClass(TestForm, [{
-    key: 'render',
-    value: function render() {
-      var _this3 = this;
-
-      return _react2.default.createElement(
-        _reactFormstate.Form,
-        { formState: this.formState, onSubmit: function onSubmit(e) {
-            return _this3.handleSubmit(e);
-          } },
-        _react2.default.createElement(RfsInput, {
-          formField: 'test',
-          label: 'Test',
-          required: true,
-          fsv: function fsv(v) {
-            return v.minLength(8);
-          },
-          grabRef: this.props.grabInputRef
-        }),
-        _react2.default.createElement('input', { type: 'submit', value: 'Submit', disabled: this.formState.isInvalid() })
-      );
-    }
-  }, {
-    key: 'handleSubmit',
-    value: function handleSubmit(e) {
-      e.preventDefault();
-      var model = this.formState.createUnitOfWork().createModel();
-      if (model) {
-        alert(JSON.stringify(model));
-      }
-    }
-  }]);
-
-  return TestForm;
-}(_react.Component);
-
-exports.default = TestForm;
+    return fs;
+  });
+}
